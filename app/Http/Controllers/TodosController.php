@@ -8,11 +8,12 @@ use App\Todo;
 class TodosController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.dump('Successfully sent mail to developer!');
      *
      * @return \Illuminate\Http\Response
      */
-    public function storeTodo(Request $request){
+    public function storeTodo(Request $request)
+    {
         $request->validate([
             'text' => 'required',
             'body' => 'required',
@@ -25,16 +26,15 @@ class TodosController extends Controller
         $todo->body = $request->body;
         $todo->due = $request->due;
         $todo->save();
-        return redirect('todo')->with('success','Todo Created');
+        return redirect('todo')->with('success', 'Todo Created');
     }
 
-    
-    
+
     public function index()
     {
         //$todos = Todo::all();
-        $todos = Todo::orderBy('created_at','desc')->get();
-        return view('todos.index')->with('todos',$todos);
+        $todos = Todo::orderBy('created_at', 'desc')->get();
+        return view('todos.index')->with('todos', $todos);
     }
 
     /**
@@ -45,54 +45,48 @@ class TodosController extends Controller
     public function create()
     {
         return view('todos.create');
-        
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
-
-        
-
-        
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $todo = Todo::find($id);
-        return view('todos.show')->with('todo',$todo);
+        return view('todos.show')->with('todo', $todo);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $todo = Todo::find($id);
-        return view('todos.edit')->with('todo',$todo);
+        return view('todos.edit')->with('todo', $todo);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -107,23 +101,23 @@ class TodosController extends Controller
         $todo->body = $request->body;
         $todo->due = $request->due;
         $todo->save();
-        
-        return redirect('todo')->with('success','Todo Updated');
+
+        return redirect('todo')->with('success', 'Todo Updated');
 
     }
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    
-    
+
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -131,6 +125,6 @@ class TodosController extends Controller
         $todo = Todo::find($id);
         $todo->delete();
 
-        return redirect('/')->with('success','Todo Deleted');
+        return redirect('/')->with('success', 'Todo Deleted');
     }
 }
